@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import Image from "next/image";
 import {
   ArrowRight,
   Award,
@@ -38,28 +39,16 @@ import dtf from "@/assets/dtf-printing.jpg";
 import fabrics from "@/assets/fabric-rolls.jpg";
 import contactMockup from "@/assets/contact-mockup.jpg";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "PRNT — Materiale textile personalizate pentru orice nevoie" },
-      {
-        name: "description",
-        content:
-          "Tricouri, hanorace, polo, șepci, genți și echipamente de lucru personalizate prin imprimare DTF. Pentru persoane fizice, companii și instituții publice.",
-      },
-      {
-        property: "og:title",
-        content: "PRNT — Materiale textile personalizate",
-      },
-      {
-        property: "og:description",
-        content:
-          "Printuri românești pentru nevoile tuturor. Cere oferta pentru proiectul tău textil.",
-      },
-    ],
-  }),
-  component: Index,
-});
+export const metadata: Metadata = {
+  title: "PRNT — Materiale textile personalizate pentru orice nevoie",
+  description:
+    "Tricouri, hanorace, polo, șepci, genți și echipamente de lucru personalizate prin imprimare DTF. Pentru persoane fizice, companii și instituții publice.",
+  openGraph: {
+    title: "PRNT — Materiale textile personalizate",
+    description:
+      "Printuri românești pentru nevoile tuturor. Cere oferta pentru proiectul tău textil.",
+  },
+};
 
 const benefits = [
   {
@@ -222,10 +211,9 @@ function Logo({ small }: { small?: boolean }) {
   );
 }
 
-function Index() {
+export default function HomePage() {
   return (
     <main className="overflow-hidden">
-      {/* HERO */}
       <section className="relative bg-cream">
         <div
           aria-hidden="true"
@@ -252,17 +240,17 @@ function Index() {
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <img
+          <Image
             src={hero}
             alt="Tricouri personalizate împăturite alături de etichetă și mostre de material"
             width={1200}
             height={912}
+            priority
             className="w-full rounded-sm object-cover"
           />
         </div>
       </section>
 
-      {/* BENEFITS */}
       <section className="bg-cream/60">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-14 sm:grid-cols-3 lg:grid-cols-6">
           {benefits.map((b) => (
@@ -279,7 +267,6 @@ function Index() {
 
       <div aria-hidden="true" className="folk-band" />
 
-      {/* AUDIENCES */}
       <section className="bg-background py-16">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="section-title">
@@ -292,10 +279,9 @@ function Index() {
                 key={a.title}
                 className="overflow-hidden rounded-sm border border-border bg-card"
               >
-                <img
+                <Image
                   src={a.img}
                   alt={a.title}
-                  loading="lazy"
                   width={800}
                   height={600}
                   className="h-52 w-full object-cover"
@@ -313,7 +299,6 @@ function Index() {
         </div>
       </section>
 
-      {/* PRODUCTS */}
       <section className="bg-cream/60 py-16">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="section-title">
@@ -326,10 +311,9 @@ function Index() {
                 key={p.name}
                 className="overflow-hidden rounded-sm border border-border bg-card"
               >
-                <img
+                <Image
                   src={p.img}
                   alt={p.name}
-                  loading="lazy"
                   width={600}
                   height={600}
                   className="aspect-square w-full object-cover"
@@ -343,7 +327,6 @@ function Index() {
         </div>
       </section>
 
-      {/* PROCESS */}
       <section className="bg-background py-16">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="section-title">
@@ -365,7 +348,6 @@ function Index() {
         </div>
       </section>
 
-      {/* DTF */}
       <section className="grid items-stretch md:grid-cols-2">
         <div className="flex flex-col justify-center bg-accent px-8 py-14 md:px-16">
           <h2 className="font-display text-2xl font-bold leading-snug md:text-3xl">
@@ -384,22 +366,19 @@ function Index() {
             Află mai multe
           </a>
         </div>
-        <img
+        <Image
           src={dtf}
           alt="Imprimantă DTF care imprimă un design colorat pe film transfer"
-          loading="lazy"
           width={1000}
           height={700}
           className="h-full min-h-[18rem] w-full object-cover"
         />
       </section>
 
-      {/* MATERIALS */}
       <section className="grid items-stretch md:grid-cols-2">
-        <img
+        <Image
           src={fabrics}
           alt="Suluri de material textil natural în nuanțe de crem și bej"
-          loading="lazy"
           width={900}
           height={700}
           className="h-full min-h-[18rem] w-full object-cover"
@@ -423,7 +402,6 @@ function Index() {
         </div>
       </section>
 
-      {/* VALUES */}
       <section className="bg-background py-16">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="section-title">
@@ -444,7 +422,6 @@ function Index() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
       <section className="bg-sand/70 py-16">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="section-title">
@@ -471,7 +448,6 @@ function Index() {
         </div>
       </section>
 
-      {/* CONTACT */}
       <section id="contact" className="bg-cream py-16">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[1fr_1.1fr_0.8fr]">
           <div>
@@ -518,10 +494,9 @@ function Index() {
             </button>
           </form>
 
-          <img
+          <Image
             src={contactMockup}
             alt="Sacoșă textilă și tricouri albe pregătite pentru personalizare"
-            loading="lazy"
             width={800}
             height={800}
             className="w-full rounded-sm object-cover"
@@ -529,7 +504,6 @@ function Index() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="border-t border-border bg-background py-12">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 text-sm sm:grid-cols-2 lg:grid-cols-4">
           <div>

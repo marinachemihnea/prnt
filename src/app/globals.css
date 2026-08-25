@@ -1,22 +1,7 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -62,8 +47,8 @@
 }
 
 @theme inline {
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   --color-brick: var(--brick);
   --color-brick-soft: var(--brick-soft);
   --color-cream: var(--cream);
@@ -135,7 +120,6 @@
   }
 }
 
-/* Romanian folk-motif band, drawn purely with CSS gradients */
 @utility folk-band {
   height: 2.25rem;
   background-color: var(--cream);
@@ -174,4 +158,3 @@
   margin: 0.75rem auto 0;
   background-color: var(--brick);
 }
-
