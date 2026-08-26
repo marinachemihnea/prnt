@@ -25,20 +25,24 @@ import {
   Users,
 } from "lucide-react";
 
-import hero from "@/assets/hero-textiles.jpg";
+import imgRiveSoft from "@/assets/rivesoft/logo.png"
+import imgLogo from "@/assets/logo.png"
+
+import hero from "@/assets/hero.png";
 import audPersoane from "@/assets/aud-persoane.jpg";
 import audCompanii from "@/assets/aud-companii.jpg";
 import audInstitutii from "@/assets/aud-institutii.jpg";
-import prodTricouri from "@/assets/prod-tricouri.jpg";
-import prodHanorace from "@/assets/prod-hanorace.jpg";
-import prodPolo from "@/assets/prod-polo.jpg";
-import prodSepci from "@/assets/prod-sepci.jpg";
-import prodGenti from "@/assets/prod-genti.jpg";
-import prodEchipamente from "@/assets/prod-echipamente.jpg";
+import prodTricouri from "@/assets/clothes/tshirt.png";
+import prodHanorace from "@/assets/clothes/hoodie.png";
+import prodPolo from "@/assets/clothes/tshirt-polo.png";
+import prodSepci from "@/assets/clothes/cap.png";
+import prodGenti from "@/assets/clothes/bag.png";
+import prodEchipamente from "@/assets/clothes/jacket.png";
 import dtf from "@/assets/dtf-printing.jpg";
 import fabrics from "@/assets/fabric-rolls.jpg";
-import contactMockup from "@/assets/contact-mockup.jpg";
+import contactMockup from "@/assets/formular.png";
 import separatorPRNT from "@/assets/separatorPRNT.png";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "PRNT — Materiale textile personalizate pentru orice nevoie",
@@ -191,24 +195,9 @@ const testimonials = [
   },
 ];
 
-function Logo({ small }: { small?: boolean }) {
+function Logo({ small, className }: { small?: boolean, className?: string }) {
   return (
-    <div>
-      <span
-        className={`block font-display font-extrabold tracking-tight text-primary ${
-          small ? "text-2xl" : "text-4xl"
-        }`}
-      >
-        PRNT
-      </span>
-      {!small && (
-        <span className="mt-1 block text-[0.6rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-          Printuri românești
-          <br />
-          pentru nevoile tuturor
-        </span>
-      )}
-    </div>
+      <Image className={className ?? ""} src={imgLogo} width={1000} height={1000} alt="Logo"/>
   );
 }
 
@@ -229,7 +218,7 @@ export default function HomePage() {
         </div>
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-8 py-14 md:grid-cols-2 md:px-16 md:py-20">
           <div>
-            <Logo />
+            <Logo className="w-42" />
             <h1 className="mt-8 font-display text-4xl font-extrabold leading-[1.1] md:text-5xl">
               Materiale textile
               <br />
@@ -251,10 +240,10 @@ export default function HomePage() {
           <Image
             src={hero}
             alt="Tricouri personalizate împăturite alături de etichetă și mostre de material"
-            width={1200}
-            height={912}
+            width={1754}
+            height={897}
             priority
-            className="w-full rounded-sm object-cover"
+            className="w-full rounded-sm object-cover aspect-4/3"
           />
         </div>
       </section>
@@ -317,7 +306,7 @@ export default function HomePage() {
             Ce produse putem furniza
             <span aria-hidden="true" className="title-rule" />
           </h2>
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3">
             {products.map((p) => (
               <figure
                 key={p.name}
@@ -330,7 +319,7 @@ export default function HomePage() {
                   height={600}
                   className="aspect-square w-full object-cover"
                 />
-                <figcaption className="bg-sand px-2 py-3 text-center text-[0.65rem] font-bold uppercase tracking-[0.1em]">
+                <figcaption className="bg-sand h-full px-2 py-3 text-center text-[0.65rem] font-bold uppercase tracking-[0.1em]">
                   {p.name}
                 </figcaption>
               </figure>
@@ -361,13 +350,13 @@ export default function HomePage() {
       </section>
 
       <section className="grid items-stretch md:grid-cols-2">
-        <div className="flex flex-col justify-center bg-accent px-8 py-14 md:px-16">
-          <h2 className="font-display text-2xl font-bold leading-snug md:text-3xl">
+        <div className="flex flex-col justify-center bg-accent items-end px-8 py-14 md:px-16">
+          <h2 className="font-display text-2xl font-bold leading-snug md:text-3xl text-end">
             Imprimare DTF
             <br />
             de înaltă calitate
           </h2>
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-accent-foreground/80">
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-accent-foreground/80 text-end">
             Folosim tehnologia DTF pentru imprimeuri rezistente, detaliate și
             durabile, potrivite pentru o gamă largă de materiale textile.
           </p>
@@ -433,6 +422,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <div
+        aria-hidden="true"
+        className="folk-band"
+        style={{ backgroundImage: `url(${separatorPRNT.src})` }}
+      />
 
       <section className="bg-sand/70 py-16">
         <div className="mx-auto max-w-6xl px-6">
@@ -517,24 +512,19 @@ export default function HomePage() {
       </section>
 
       <footer className="border-t border-border bg-background py-12">
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 text-sm sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-6xl gap-8 px-6 text-sm sm:grid-cols-2 lg:grid-cols-5">
           <div>
-            <Logo small />
-            <p className="mt-2 text-xs text-muted-foreground">
-              Materiale textile personalizate
-              <br />
-              pentru orice nevoie.
-            </p>
+            <Logo className="mb-8" small />
           </div>
           <div>
             <h3 className="text-[0.65rem] font-bold uppercase tracking-[0.14em]">
               Contact
             </h3>
-            <p className="mt-3 text-xs text-muted-foreground">
-              +40 123 456 789
+            <Link href={"tel:+40774901179"} className="mt-3 text-xs text-muted-foreground">
+            +40 774 901 179
               <br />
               contact@prnt.ro
-            </p>
+            </Link>
           </div>
           <div>
             <h3 className="text-[0.65rem] font-bold uppercase tracking-[0.14em]">
@@ -548,13 +538,13 @@ export default function HomePage() {
               >
                 <Facebook className="h-5 w-5" />
               </a>
-              <a
+              {/* <a
                 href="#contact"
                 aria-label="Instagram"
                 className="text-primary transition-opacity hover:opacity-70"
               >
                 <Instagram className="h-5 w-5" />
-              </a>
+              </a> */}
             </div>
           </div>
           <div>
@@ -562,10 +552,16 @@ export default function HomePage() {
               Legal
             </h3>
             <ul className="mt-3 space-y-1 text-xs text-muted-foreground">
-              <li>ANPC</li>
+              <li><Link href={"https://www.anpc.ro"}>ANPC</Link></li>
               <li>Politică Cookies</li>
               <li>Confidențialitate</li>
             </ul>
+          </div>
+          <div>
+            <h3 className="text-[0.65rem] text-muted-foreground font-bold uppercase tracking-[0.14em]">
+              Website realizat de
+              <Link href="https://rivesoft.eu"><Image className="h-8 w-fit" src={imgRiveSoft} width={265} height={88} alt="Rive Soft"/></Link>
+            </h3>
           </div>
         </div>
       </footer>
