@@ -38,6 +38,7 @@ import prodEchipamente from "@/assets/prod-echipamente.jpg";
 import dtf from "@/assets/dtf-printing.jpg";
 import fabrics from "@/assets/fabric-rolls.jpg";
 import contactMockup from "@/assets/contact-mockup.jpg";
+import separatorPRNT from "@/assets/separatorPRNT.png";
 
 export const metadata: Metadata = {
   title: "PRNT — Materiale textile personalizate pentru orice nevoie",
@@ -217,8 +218,15 @@ export default function HomePage() {
       <section className="relative bg-cream">
         <div
           aria-hidden="true"
-          className="folk-side absolute inset-y-0 left-0 w-10 md:w-16"
-        />
+          className="folk-side absolute inset-y-0 left-0 w-20 md:w-32 xl:w-64"
+          style={
+            { "--folk-img": `url(${separatorPRNT.src})` } as React.CSSProperties
+          }
+        >
+          <div className="folk-side-col -ml-12 pl-16 md:-ml-14 md:pl-0 xl:ml-0" />
+          <div className="folk-side-col folk-side-col-offset hidden xl:block xl:-ml-32" />
+          <div className="folk-side-col hidden 2xl:block xl:-ml-32" />
+        </div>
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-8 py-14 md:grid-cols-2 md:px-16 md:py-20">
           <div>
             <Logo />
@@ -265,7 +273,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div aria-hidden="true" className="folk-band" />
+      <div
+        aria-hidden="true"
+        className="folk-band"
+        style={{ backgroundImage: `url(${separatorPRNT.src})` }}
+      />
 
       <section className="bg-background py-16">
         <div className="mx-auto max-w-6xl px-6">

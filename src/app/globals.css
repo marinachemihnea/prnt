@@ -121,27 +121,46 @@
 }
 
 @utility folk-band {
-  height: 2.25rem;
-  background-color: var(--cream);
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      var(--brick) 0 2px,
-      transparent 2px 10px
-    ),
-    repeating-linear-gradient(-45deg, var(--brick) 0 2px, transparent 2px 10px);
-  background-size: 14px 14px;
-  opacity: 0.85;
-  border-top: 1px solid var(--brick-soft);
-  border-bottom: 1px solid var(--brick-soft);
+  width: 100%;
+  height: 5rem;
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 100%;
 }
 
-@utility folk-side {
-  background-image:
-    repeating-linear-gradient(45deg, var(--brick) 0 2px, transparent 2px 12px),
-    repeating-linear-gradient(-45deg, var(--brick) 0 2px, transparent 2px 12px);
-  background-size: 16px 16px;
-  opacity: 0.18;
+.folk-side {
+  display: flex;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 18%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 18%, transparent 100%);
+}
+
+.folk-side-col {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  container-type: size;
+}
+
+.folk-side-col::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100cqh;
+  height: 100cqw;
+  background-image: var(--folk-img);
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: 0 center;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.folk-side-col-offset::before {
+  /* Shift by half a tile so the right column interlocks with the left. */
+  background-position: calc(796 / 313 * 50cqw) center;
 }
 
 @utility section-title {
