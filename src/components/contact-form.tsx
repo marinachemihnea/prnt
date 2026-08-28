@@ -1,15 +1,68 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import Script from "next/script";
+import { FormEvent, useEffect, useRef, useState } from "react";
+
+const HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
 type ContactState = {
   ok: boolean;
   message: string;
 };
 
-export function ContactForm() {
+type HCaptchaApi = {
+  render: (
+    container: HTMLElement,
+    opts: {
+      sitekey: string;
+      callback?: (token: string) => void;
+      "expired-callback"?: () => void;
+      "error-callback"?: () => void;
+    },
+  ) => string;
+  reset: (widgetId?: string) => void;
+  remove: (widgetId: string) => void;
+};
+
+declare global {
+  interface Window {
+    hcaptcha?: HCaptchaApi;
+  }
+}
+
+export function ContactForm({ accessKey }: { accessKey: string }) {
   const [pending, setPending] = useState(false);
   const [state, setState] = useState<ContactState>({ ok: false, message: "" });
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [scriptReady, setScriptReady] = useState(false);
+  const captchaHostRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const host = captchaHostRef.current;
+    if (!scriptReady || !host || !window.hcaptcha || widgetIdRef.current) return;
+
+    widgetIdRef.current = window.hcaptcha.render(host, {
+      sitekey: HCAPTCHA_SITEKEY,
+      callback: (token) => setCaptchaToken(token),
+      "expired-callback": () => setCaptchaToken(""),
+      "error-callback": () => setCaptchaToken(""),
+    });
+
+    return () => {
+      if (widgetIdRef.current && window.hcaptcha?.remove) {
+        window.hcaptcha.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, [scriptReady]);
+
+  function resetCaptcha() {
+    setCaptchaToken("");
+    if (widgetIdRef.current && window.hcaptcha) {
+      window.hcaptcha.reset(widgetIdRef.current);
+    }
+  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -19,29 +72,65 @@ export function ContactForm() {
     setPending(true);
     setState({ ok: false, message: "" });
 
+    if (!accessKey) {
+      setPending(false);
+      setState({
+        ok: false,
+        message: "Formularul nu este configurat. Încearcă mai târziu.",
+      });
+      return;
+    }
+
+    if (!captchaToken) {
+      setPending(false);
+      setState({
+        ok: false,
+        message: "Completează verificarea captcha.",
+      });
+      return;
+    }
+
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-          phone: formData.get("phone"),
-          message: formData.get("message"),
+          access_key: accessKey,
+          name: String(formData.get("name") ?? "").trim(),
+          email: String(formData.get("email") ?? "").trim(),
+          phone: String(formData.get("phone") ?? "").trim(),
+          message: String(formData.get("message") ?? "").trim(),
+          subject: `Mesaj nou de pe PRNT — ${String(formData.get("name") ?? "").trim()}`,
+          from_name: "PRNT",
           botcheck: Boolean(formData.get("botcheck")),
+          "h-captcha-response": captchaToken,
         }),
       });
 
-      const data = (await response.json().catch(() => null)) as ContactState | null;
-      const nextState = data ?? {
-        ok: false,
-        message: "A apărut o eroare. Încearcă din nou.",
-      };
-      setState(nextState);
-      if (nextState.ok) {
+      const data = (await response.json().catch(() => null)) as {
+        success?: boolean;
+        message?: string;
+      } | null;
+
+      if (response.ok && data?.success) {
         form.reset();
+        resetCaptcha();
+        setState({
+          ok: true,
+          message: "Mesajul a fost trimis. Te contactăm în curând.",
+        });
+      } else {
+        resetCaptcha();
+        setState({
+          ok: false,
+          message: data?.message || "A apărut o eroare. Încearcă din nou.",
+        });
       }
     } catch {
+      resetCaptcha();
       setState({
         ok: false,
         message: "A apărut o eroare. Încearcă din nou.",
@@ -53,6 +142,12 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-3">
+      <Script
+        src="https://js.hcaptcha.com/1/api.js?render=explicit"
+        strategy="afterInteractive"
+        data-cookieconsent="ignore"
+        onReady={() => setScriptReady(true)}
+      />
       <input
         type="checkbox"
         name="botcheck"
@@ -93,6 +188,7 @@ export function ContactForm() {
         required
         className="w-full rounded-sm border border-input bg-card px-3 py-2.5 text-sm outline-none focus:border-primary"
       />
+      <div ref={captchaHostRef} className="min-h-[78px]" />
       <button
         type="submit"
         disabled={pending}

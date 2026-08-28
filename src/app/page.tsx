@@ -876,7 +876,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <ContactForm />
+          <ContactForm accessKey={process.env.WEB3FORMS_KEY ?? ""} />
 
           <Image
             src={contactMockup}
