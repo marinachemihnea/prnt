@@ -8,6 +8,8 @@ import {
   FileText,
   Handshake,
   Heart,
+  Home,
+  Info,
   Instagram,
   Facebook,
   Landmark,
@@ -17,6 +19,7 @@ import {
   Search,
   Shield,
   ShirtIcon,
+  ShoppingBag,
   Sparkles,
   Star,
   Tag,
@@ -174,6 +177,208 @@ const values = [
   },
 ];
 
+function IconPrintSmall({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M5 3v3H2M19 3v3h3M2 19h3v3M19 21v-3h3" />
+      <rect x="7" y="7" width="10" height="10" rx="0.5" />
+    </svg>
+  );
+}
+
+function IconPrintMedium({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="4" y="8" width="16" height="8" rx="0.5" />
+      <path d="M8 12H3m0 0 2-2M3 12l2 2M16 12h5m0 0-2-2m2 2-2 2" />
+    </svg>
+  );
+}
+
+function IconPrintStandard({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="8" y="3" width="8" height="18" rx="0.5" />
+      <path d="M12 8V3m0 0-2 2M12 3l2 2M12 16v5m0 0-2-2m2 2 2-2" />
+    </svg>
+  );
+}
+
+function IconPrintLarge({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="7" y="7" width="10" height="10" rx="0.5" />
+      <path d="M7 7 3 3m0 0h4M3 3v4M17 7l4-4m0 0h-4m4 0v4M7 17l-4 4m0 0h4M3 21v-4M17 17l4 4m0 0h-4m4 0v-4" />
+    </svg>
+  );
+}
+
+function IconHoodie({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M7.2 9.4C6.6 4.4 17.4 4.4 16.8 9.4" />
+      <path d="M8.4 9.6C9.6 12.6 14.4 12.6 15.6 9.6" />
+      <path d="M11.15 12.1v2.6M12.85 12.1v2.6" />
+      <path d="M8.2 10.2v9.4c0 .8.6 1.4 1.4 1.4h4.8c.8 0 1.4-.6 1.4-1.4v-9.4" />
+      <path d="M8.2 10.4C5.4 10.8 4 12 4 13.4V21h2.4v-7.2" />
+      <path d="M15.8 10.4C18.6 10.8 20 12 20 13.4V21h-2.4v-7.2" />
+    </svg>
+  );
+}
+
+function IconCap({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M4 14c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+      <path d="M3 15h18" />
+      <path d="M4 15c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+    </svg>
+  );
+}
+
+function IconPolo({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M9 4.5 12 7l3-2.5" />
+      <path d="M9 4.5 6 7.5 4 10v5h3v6h10v-6h3v-5l-2-2.5L15 4.5C14 6 13 7 12 7S10 6 9 4.5Z" />
+    </svg>
+  );
+}
+
+function IconVest({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M8.6 3.8 5.4 8.2c-.5.7-.6 2.4-.6 4V21h14.4v-8.8c0-1.6-.1-3.3-.6-4L15.4 3.8 12 11.2 8.6 3.8Z" />
+      <path d="M12 11.2V21" />
+      <path d="M6.6 15.6h10.8M6.6 18h10.8" />
+    </svg>
+  );
+}
+
+type PriceIcon = (props: { className?: string }) => React.ReactNode;
+
+const dtfPrices: {
+  icon: PriceIcon;
+  title: string;
+  hint?: string;
+  price: string;
+  quote?: boolean;
+}[] = [
+  {
+    icon: IconPrintSmall,
+    title: "Mic — până în 12 cm",
+    hint: "10 × 10 cm — ideal pentru un logo pe piept",
+    price: "10 lei",
+  },
+  {
+    icon: IconPrintMedium,
+    title: "Mediu — 13–29 cm",
+    price: "15–20 lei",
+  },
+  {
+    icon: IconPrintStandard,
+    title: "Standard — 30–40 cm",
+    hint: "30 × 40 cm — ideal pentru un print mare pe față sau pe spate",
+    price: "25 lei",
+  },
+  {
+    icon: IconPrintLarge,
+    title: "Peste 40 cm",
+    price: "Cere ofertă",
+    quote: true,
+  },
+];
+
+const supplyPrices: {
+  icon: PriceIcon;
+  name: string;
+  price: string;
+  quote?: boolean;
+}[] = [
+  { icon: ShirtIcon, name: "Tricou", price: "+50 lei/buc." },
+  { icon: IconHoodie, name: "Hanorac", price: "+100 lei/buc." },
+  { icon: IconCap, name: "Șapcă", price: "+30 lei/buc." },
+  { icon: IconPolo, name: "Polo", price: "+60 lei/buc." },
+  { icon: ShoppingBag, name: "Tote bag", price: "+30 lei/buc." },
+  {
+    icon: IconVest,
+    name: "Echipamente de lucru",
+    price: "Cere ofertă",
+    quote: true,
+  },
+];
+
 const testimonials = [
   {
     quote:
@@ -194,13 +399,6 @@ const testimonials = [
     role: "Coordonator proiect, instituție publică",
   },
 ];
-
-function Logo({ small, className }: { small?: boolean, className?: string }) {
-  return (
-      <Image className={className ?? ""} src={imgLogo} width={1000} height={1000} alt="Logo"/>
-  );
-}
-
 export default function HomePage() {
   return (
     <main className="overflow-hidden">
@@ -218,7 +416,7 @@ export default function HomePage() {
         </div>
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-8 py-14 md:grid-cols-2 md:px-16 md:py-20">
           <div>
-            <Logo className="w-42" />
+          <Image className="w-56 md:w-82" src={imgLogo} width={2486} height={1177} alt="Logo"/>
             <h1 className="mt-8 font-display text-4xl font-extrabold leading-[1.1] md:text-5xl">
               Materiale textile
               <br />
@@ -328,6 +526,115 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section id="preturi" className="bg-cream py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="overflow-hidden bg-cream">
+            <div className="grid md:grid-cols-[1fr_auto_1fr] gap-4">
+              <article className="flex flex-col px-6 py-8 sm:px-10 md:py-10 rounded-2xl border border-primary/50">
+                <h2 className="font-display text-lg font-extrabold uppercase tracking-wide text-primary sm:text-xl">
+                  Preț imprimare DTF
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 block h-0.5 w-16 bg-primary"
+                  />
+                </h2>
+                <ul className="mt-6 divide-y divide-border">
+                  {dtfPrices.map((row) => (
+                    <li
+                      key={row.title}
+                      className="flex items-center gap-4 py-4 first:pt-0 last:pb-0"
+                    >
+                      <row.icon className="h-8 w-8 shrink-0 stroke-[1.35] text-primary" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold">{row.title}</p>
+                        {row.hint ? (
+                          <p className="mt-0.5 text-xs text-primary">{row.hint}</p>
+                        ) : null}
+                      </div>
+                      {row.quote ? (
+                        <a
+                          href="#contact"
+                          className="shrink-0 text-sm font-bold text-primary hover:underline"
+                        >
+                          {row.price}
+                        </a>
+                      ) : (
+                        <p className="shrink-0 text-sm font-bold text-primary">
+                          {row.price}
+                        </p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <p className="flex items-start gap-2 border-t mt-4 border-dashed border-primary/40 pt-5 text-xs leading-relaxed text-muted-foreground">
+                  <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  Prețul se calculează în funcție de dimensiunea maximă a
+                  printului.
+                </p>
+              </article>
+
+              <div
+                aria-hidden="true"
+                className="folk-side w-10"
+                style={
+                  { "--folk-img": `url(${separatorPRNT.src})` } as React.CSSProperties
+                }
+              >
+                <div className="folk-side-col -mx-7" />
+              </div>
+
+              <article className="flex flex-col px-6 py-8 sm:px-10 md:py-10 rounded-2xl border border-primary/50">
+                <h2 className="font-display text-lg font-extrabold uppercase tracking-wide text-primary sm:text-xl">
+                  Nu ai produsul? Ne ocupăm noi.
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 block h-0.5 w-16 bg-primary"
+                  />
+                </h2>
+                <p className="mt-3 text-md">
+                  Îți putem furniza și produsul pe care îl personalizăm.
+                </p>
+                <ul className="mt-6 space-y-3.5">
+                  {supplyPrices.map((row) => (
+                    <li key={row.name} className="flex items-center gap-3">
+                      <row.icon className="h-6 w-6 shrink-0 stroke-[1.35] text-primary" />
+                      <span className="text-md font-medium">{row.name}</span>
+                      <span
+                        aria-hidden="true"
+                        className="min-w-4 flex-1 border-b border-dotted border-primary/40"
+                      />
+                      {row.quote ? (
+                        <a
+                          href="#contact"
+                          className="shrink-0 text-sm font-bold text-primary hover:underline"
+                        >
+                          {row.price}
+                        </a>
+                      ) : (
+                        <span className="shrink-0 text-sm font-bold text-primary">
+                          {row.price}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex items-start gap-3 mt-4 border-t border-dashed border-primary/40 pt-5">
+                  <Home className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                  <p className="text-xs leading-relaxed text-muted-foreground">
+                    <span className="block font-bold text-foreground">
+                      Ai deja produsul?
+                    </span>
+                    Perfect. Vii cu el de acasă și plătești{" "}
+                    <span className="font-bold text-primary">doar imprimarea</span>
+                    .
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-background py-16">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="section-title">
@@ -350,7 +657,7 @@ export default function HomePage() {
       </section>
 
       <section className="grid items-stretch md:grid-cols-2">
-        <div className="flex flex-col justify-center bg-accent items-end px-8 py-14 md:px-16">
+        <div className="flex flex-col justify-center bg-sand items-end px-8 py-14 md:px-16">
           <h2 className="font-display text-2xl font-bold leading-snug md:text-3xl text-end">
             Imprimare DTF
             <br />
@@ -396,7 +703,7 @@ export default function HomePage() {
           </p>
           <a
             href="#contact"
-            className="mt-7 inline-flex w-fit items-center rounded-sm border border-primary px-5 py-2.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="mt-7 inline-flex w-fit items-center rounded-sm bg-primary px-5 py-2.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Vezi opțiunile de materiale
           </a>
@@ -513,9 +820,7 @@ export default function HomePage() {
 
       <footer className="border-t border-border bg-background py-12">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 text-sm sm:grid-cols-2 lg:grid-cols-5">
-          <div>
-            <Logo className="mb-8" small />
-          </div>
+        <Image className="w-42 -mt-8" src={imgLogo} width={2486} height={1177} alt="Logo"/>
           <div>
             <h3 className="text-[0.65rem] font-bold uppercase tracking-[0.14em]">
               Contact
