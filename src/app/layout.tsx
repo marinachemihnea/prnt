@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
+import Link from "next/link";
 
 import "./globals.css";
-import Link from "next/link";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -44,8 +45,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${dmSans.variable} ${plusJakarta.variable}`}>
-      <meta name="apple-mobile-web-app-title" content="Prnt" />
-      <body>{children}
+      <head>
+        <meta name="apple-mobile-web-app-title" content="Prnt" />
+        {process.env.COOKIEBOT_ID ? (
+          <Script
+            id="Cookiebot"
+            src="https://consent.cookiebot.com/uc.js"
+            data-cbid={process.env.COOKIEBOT_ID}
+            data-blockingmode="auto"
+            strategy="beforeInteractive"
+          />
+        ) : null}
+      </head>
+      <body>
+        {children}
 
       <Link
         href="https://wa.me/+40774901179" 
