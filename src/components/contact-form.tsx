@@ -1,5 +1,6 @@
 "use client";
 
+import { CircleCheck } from "lucide-react";
 import Script from "next/script";
 import { FormEvent, useEffect, useRef, useState } from "react";
 
@@ -197,12 +198,19 @@ export function ContactForm({ accessKey }: { accessKey: string }) {
         {pending ? "Se trimite…" : "Trimite mesaj"}
       </button>
       {state.message ? (
-        <p
-          role="status"
-          className={`text-sm ${state.ok ? "text-primary" : "text-destructive"}`}
-        >
-          {state.message}
-        </p>
+        state.ok ? (
+          <p
+            role="status"
+            className="flex items-center gap-2.5 rounded-sm border border-border bg-sand px-3 py-3 text-sm leading-relaxed text-foreground"
+          >
+            <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />
+            {state.message}
+          </p>
+        ) : (
+          <p role="status" className="text-sm text-destructive">
+            {state.message}
+          </p>
+        )
       ) : null}
     </form>
   );
