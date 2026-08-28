@@ -1,16 +1,58 @@
 "use client";
 
-import { useActionState } from "react";
+import { FormEvent, useState } from "react";
 
-import { submitContact, type ContactState } from "@/app/actions/contact";
-
-const initialState: ContactState = { ok: false, message: "" };
+type ContactState = {
+  ok: boolean;
+  message: string;
+};
 
 export function ContactForm() {
-  const [state, formAction, pending] = useActionState(submitContact, initialState);
+  const [pending, setPending] = useState(false);
+  const [state, setState] = useState<ContactState>({ ok: false, message: "" });
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setPending(true);
+    setState({ ok: false, message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          message: formData.get("message"),
+          botcheck: Boolean(formData.get("botcheck")),
+        }),
+      });
+
+      const data = (await response.json().catch(() => null)) as ContactState | null;
+      const nextState = data ?? {
+        ok: false,
+        message: "A apărut o eroare. Încearcă din nou.",
+      };
+      setState(nextState);
+      if (nextState.ok) {
+        form.reset();
+      }
+    } catch {
+      setState({
+        ok: false,
+        message: "A apărut o eroare. Încearcă din nou.",
+      });
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
-    <form action={formAction} className="space-y-3">
+    <form onSubmit={onSubmit} className="space-y-3">
       <input
         type="checkbox"
         name="botcheck"
