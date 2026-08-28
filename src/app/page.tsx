@@ -836,13 +836,13 @@ export default function HomePage() {
               Urmărește-ne
             </h3>
             <div className="mt-3 flex gap-3">
-              <a
-                href="#contact"
+              <Link
+                href="https://www.facebook.com/people/PRNTro/61593979378668/"
                 aria-label="Facebook"
                 className="text-primary transition-opacity hover:opacity-70"
               >
                 <Facebook className="h-5 w-5" />
-              </a>
+              </Link>
               {/* <a
                 href="#contact"
                 aria-label="Instagram"
