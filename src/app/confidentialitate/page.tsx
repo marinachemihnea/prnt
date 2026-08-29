@@ -197,20 +197,6 @@ export default function ConfidentialitatePage() {
               durată, furnizori) apar în declarația de mai jos, când
               configurația Cookiebot este activă.
             </p>
-            {cookiebotId ? (
-              <div className="mt-6 rounded-sm border border-border bg-background p-4">
-                <Script
-                  id="CookieDeclaration"
-                  src={`https://consent.cookiebot.com/${cookiebotId}/cd.js`}
-                  strategy="afterInteractive"
-                />
-              </div>
-            ) : (
-              <p className="mt-3 text-muted-foreground">
-                Declarația detaliată de cookie-uri este disponibilă prin bannerul
-                Cookiebot, atunci când acesta este configurat.
-              </p>
-            )}
           </section>
         </div>
       </article>
