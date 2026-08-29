@@ -931,7 +931,11 @@ export default function HomePage() {
               <li>
                 <CookieSettingsLink />
               </li>
-              <li>Confidențialitate</li>
+              <li>
+                <Link href="/confidentialitate" className="hover:text-foreground">
+                  Confidențialitate
+                </Link>
+              </li>
             </ul>
           </div>
           <div>

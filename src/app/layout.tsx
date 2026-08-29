@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${plusJakarta.variable}`}>
+    <html lang="ro" className={`${dmSans.variable} ${plusJakarta.variable}`}>
       <head>
         <meta name="apple-mobile-web-app-title" content="Prnt" />
         {process.env.COOKIEBOT_ID ? (

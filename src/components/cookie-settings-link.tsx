@@ -10,11 +10,11 @@ declare global {
   }
 }
 
-export function CookieSettingsLink() {
+export function CookieSettingsLink({ className }: { className?: string }) {
   return (
     <button
       type="button"
-      className="text-left hover:text-foreground"
+      className={className ?? "text-left hover:text-foreground"}
       onClick={() => window.Cookiebot?.renew()}
     >
       Politică Cookies

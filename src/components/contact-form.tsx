@@ -1,6 +1,7 @@
 "use client";
 
 import { CircleCheck } from "lucide-react";
+import Link from "next/link";
 import Script from "next/script";
 import { FormEvent, useEffect, useRef, useState } from "react";
 
@@ -35,6 +36,7 @@ export function ContactForm({ accessKey }: { accessKey: string }) {
   const [pending, setPending] = useState(false);
   const [state, setState] = useState<ContactState>({ ok: false, message: "" });
   const [captchaToken, setCaptchaToken] = useState("");
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [scriptReady, setScriptReady] = useState(false);
   const captchaHostRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
@@ -82,6 +84,15 @@ export function ContactForm({ accessKey }: { accessKey: string }) {
       return;
     }
 
+    if (!privacyAccepted) {
+      setPending(false);
+      setState({
+        ok: false,
+        message: "Confirmă că ai citit politica de confidențialitate.",
+      });
+      return;
+    }
+
     if (!captchaToken) {
       setPending(false);
       setState({
@@ -118,6 +129,7 @@ export function ContactForm({ accessKey }: { accessKey: string }) {
 
       if (response.ok && data?.success) {
         form.reset();
+        setPrivacyAccepted(false);
         resetCaptcha();
         setState({
           ok: true,
@@ -190,6 +202,27 @@ export function ContactForm({ accessKey }: { accessKey: string }) {
         className="w-full rounded-sm border border-input bg-card px-3 py-2.5 text-sm outline-none focus:border-primary"
       />
       <div ref={captchaHostRef} className="min-h-[78px]" />
+      <label className="flex items-start gap-2.5 text-xs leading-relaxed text-muted-foreground">
+        <input
+          type="checkbox"
+          name="privacy"
+          required
+          checked={privacyAccepted}
+          onChange={(e) => setPrivacyAccepted(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+        />
+        <span>
+          Am citit{" "}
+          <Link
+            href="/confidentialitate"
+            className="font-medium text-primary hover:underline"
+          >
+            Politica de confidențialitate
+          </Link>{" "}
+          și sunt de acord cu prelucrarea datelor din acest formular pentru a
+          primi un răspuns.
+        </span>
+      </label>
       <button
         type="submit"
         disabled={pending}
